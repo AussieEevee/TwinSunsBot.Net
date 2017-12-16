@@ -43,7 +43,7 @@ namespace TwinSunsBot.Net
             _client.UserJoined += async (s) =>
             {
                 Console.WriteLine($"New user has joined: {s.Username}"); // Log to the console that someone joined us.
-                await s.Guild.GetTextChannel(391550686958977036).SendMessageAsync($"Welcome {s.Mention} to the server!"); // Announce them to the world
+                await s.Guild.GetTextChannel(391550686958977036).SendMessageAsync($"Welcome {s.Mention} to the server!\nFeel free to tell us a little about yourself, {s.Username}.\nWhere are you from? What Star Wars books do you like? Do you play the Star Wars video games? Are you interested in the Disney-era movies?\nAnd if you haven't already, don't forget to like our Facebook, Youtube, Twitter and Twitch accounts."); // Announce them to the world
                 
             };
 
