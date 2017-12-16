@@ -1,9 +1,13 @@
-﻿namespace TwinSunsBot.Net
+﻿using System.IO;
+using System.Text;
+
+namespace TwinSunsBot.Net
 {
    static public class Sneaky
         {
-            private static string token = "MzkxNTcxMTgwMzI4MzIxMDQ0.DRamow.Lj99-sgT5Pn7_nO1FhADBNWoS0c";
-            //test
+            static string text = File.ReadAllText(@"c:\important\discordtoken.txt", Encoding.UTF8);
+            private static string token = text;
+            
             public static string Token { get => token; }
         }
     
