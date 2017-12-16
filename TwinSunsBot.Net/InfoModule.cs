@@ -42,11 +42,9 @@ namespace TwinSunsBot.Net
 
         [Command("random")]
         [Summary("Returns a random number.")]
-        public async Task RandomNumber()
+        public async Task RandomNumber([Summary("The lowest number.")] int min, [Summary("The highest number.")] int max)
         {
             var rnd = new Random();
-            int min = 0;
-            int max = 10000;
             await Context.Channel.SendMessageAsync($"🎲 Your random number is: {rnd.Next(min, max)}");
         }
 
