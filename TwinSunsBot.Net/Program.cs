@@ -10,7 +10,7 @@ namespace TwinSunsBot.Net
 {
     class Program
     {
-        public static double version = 0.22;
+        public static double version = 0.25; //set the version number, so we can check which version is running on the server
 
         static void Main(string[] args)
             	=> new Program().MainAsync().GetAwaiter().GetResult();
@@ -21,12 +21,12 @@ namespace TwinSunsBot.Net
         private IServiceProvider _services;
         public async Task MainAsync()
             {
-            _client = new DiscordSocketClient();
+            _client = new DiscordSocketClient(); //Create the discord client.
 
-            _client.Log += Log;
+            _client.Log += Log; // log important stuff
             _commands = new CommandService();
 
-            // Avoid hard coding your token. Use an external source instead in your code.
+            
             
 
             _services = new ServiceCollection()
@@ -34,23 +34,23 @@ namespace TwinSunsBot.Net
                 .AddSingleton(_commands)
                 .BuildServiceProvider();
 
-            await InstallCommandsAsync();
-            string token = Sneaky.Token; // Remember to keep this private!
-            await _client.LoginAsync(TokenType.Bot, token);
-            await _client.StartAsync();
+            await InstallCommandsAsync(); // Install the command service
+            string token = Sneaky.Token; // Our secret little token that is the source of all our power.
+            await _client.LoginAsync(TokenType.Bot, token); // We should login, shouldn't we?
+            await _client.StartAsync(); //Start the client.
 
 
             _client.UserJoined += async (s) =>
             {
-                Console.WriteLine($"New user has joined: {s.Username}");
-                await s.Guild.GetTextChannel(391550686958977036).SendMessageAsync($"Welcome {s.Mention} to the server!");
+                Console.WriteLine($"New user has joined: {s.Username}"); // Log to the console that someone joined us.
+                await s.Guild.GetTextChannel(391550686958977036).SendMessageAsync($"Welcome {s.Mention} to the server!"); // Announce them to the world
                 
             };
 
             _client.UserLeft += async (s) =>
             {
-                Console.WriteLine($"User left: {s.Username}");
-                await s.Guild.GetTextChannel(391550686958977036).SendMessageAsync($"{s.Username} has left the server. This makes me sad.");
+                Console.WriteLine($"User left: {s.Username}"); // Why'd they leave? :(
+                await s.Guild.GetTextChannel(391550686958977036).SendMessageAsync($"{s.Username} has left the server. This makes me sad."); // Say good bye to our comrade.
 
             };
 
@@ -87,7 +87,7 @@ namespace TwinSunsBot.Net
 
         private Task Log(LogMessage msg)
         {
-            Console.WriteLine(msg.ToString());
+            Console.WriteLine(msg.ToString()); // Log our logs to the console
             return Task.CompletedTask;
         }
         
