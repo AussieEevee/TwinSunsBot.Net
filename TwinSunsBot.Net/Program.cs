@@ -10,7 +10,7 @@ namespace TwinSunsBot.Net
 {
     class Program
     {
-        public static double version = 0.38; //set the version number, so we can check which version is running on the server
+        public static double version = 0.40; //set the version number, so we can check which version is running on the server
 
         static void Main(string[] args)
             	=> new Program().MainAsync().GetAwaiter().GetResult();
@@ -38,20 +38,20 @@ namespace TwinSunsBot.Net
             string token = Sneaky.Token; // Our secret little token that is the source of all our power.
             await _client.LoginAsync(TokenType.Bot, token); // We should login, shouldn't we?
             await _client.StartAsync(); //Start the client.
-            await _client.SetGameAsync($"TwinSunsBot.Net version {version}");
+            await _client.SetGameAsync($"v{version}"); // Set the running game to our current version.
 
 
             _client.UserJoined += async (s) =>
             {
                 Console.WriteLine($"New user has joined: {s.Username}"); // Log to the console that someone joined us.
-                await s.Guild.GetTextChannel(391550686958977036).SendMessageAsync($"Welcome {s.Mention} to the server!\nFeel free to tell us a little about yourself, {s.Username}.\nWhere are you from? What Star Wars books do you like? Do you play the Star Wars video games? Are you interested in the Disney-era movies?\nAnd if you haven't already, don't forget to like our Facebook, Youtube, Twitter and Twitch accounts."); // Announce them to the world
+                await s.Guild.DefaultChannel.SendMessageAsync($"Welcome {s.Mention} to the server!\n```Feel free to tell us a little about yourself, {s.Username}.\nWhere are you from? What Star Wars books do you like? Do you play the Star Wars video games? Are you interested in the Disney-era movies?\nAnd if you haven't already, don't forget to like our Facebook, Youtube, Twitter and Twitch accounts.```"); // Announce them to the world
                 
             };
 
             _client.UserLeft += async (s) =>
             {
                 Console.WriteLine($"User left: {s.Username}"); // Why'd they leave? :(
-                await s.Guild.GetTextChannel(391550686958977036).SendMessageAsync($"{s.Username} has left the server. This makes me sad."); // Say good bye to our comrade.
+                await s.Guild.DefaultChannel.SendMessageAsync($"{s.Username} has left the server. This makes me sad."); // Say good bye to our comrade.
 
             };
 

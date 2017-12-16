@@ -54,7 +54,7 @@ namespace TwinSunsBot.Net
         {
             double pi = Math.PI;
             var userinfo = Context.User;
-            await Context.Channel.SendMessageAsync($"You can't calculate pi yourself, {userinfo.Mention}? Pi is: " + pi);
+            await Context.Channel.SendMessageAsync($"```You can't calculate pi yourself, {userinfo.Mention}? Pi is: {pi}```");
 
         }
 
