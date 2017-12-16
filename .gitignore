@@ -260,4 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 
-TwinSunsBot.Net/Sneaky\.cs
+TwinSunsBot.Net\Sneaky.cs
