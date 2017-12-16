@@ -67,6 +67,13 @@ namespace TwinSunsBot.Net
 
         }
 
+        [Command("help")]
+        [Summary("Show a random meme")]
+        public async Task HelpMe()
+        {
+            await Context.Channel.SendMessageAsync($"Help system offline.");
+
+        }
 
 
 

@@ -10,7 +10,7 @@ namespace TwinSunsBot.Net
 {
     class Program
     {
-        public static double version = 0.36; //set the version number, so we can check which version is running on the server
+        public static double version = 0.38; //set the version number, so we can check which version is running on the server
 
         static void Main(string[] args)
             	=> new Program().MainAsync().GetAwaiter().GetResult();
@@ -26,7 +26,7 @@ namespace TwinSunsBot.Net
             _client.Log += Log; // log important stuff
             _commands = new CommandService();
 
-            
+            Console.WriteLine($"TwinSunsBot.Net version {version}");
             
 
             _services = new ServiceCollection()
@@ -38,6 +38,7 @@ namespace TwinSunsBot.Net
             string token = Sneaky.Token; // Our secret little token that is the source of all our power.
             await _client.LoginAsync(TokenType.Bot, token); // We should login, shouldn't we?
             await _client.StartAsync(); //Start the client.
+            await _client.SetGameAsync($"TwinSunsBot.Net version {version}");
 
 
             _client.UserJoined += async (s) =>
