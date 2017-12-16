@@ -19,8 +19,9 @@ namespace TwinSunsBot.Net
         public async Task PingBot()
         {
             var userinfo = Context.User;
+            var ping = Context.Client.Latency;
             // We can also access the channel from the Command Context.
-            await Context.Channel.SendMessageAsync($"Pong! I can see you, {userinfo.Mention}");
+            await Context.Channel.SendMessageAsync($"Pong! I can see you, {userinfo.Mention}. The bots ping is: {ping}ms.");
         }
 
         [Command("hi")]
@@ -39,10 +40,34 @@ namespace TwinSunsBot.Net
             await Context.Channel.SendMessageAsync($"This is Twin Suns Bot .Net version {Program.version}");
         }
 
+        [Command("random")]
+        [Summary("Returns a random number.")]
+        public async Task RandomNumber()
+        {
+            var rnd = new Random();
+            int min = 0;
+            int max = 10000;
+            await Context.Channel.SendMessageAsync($"🎲 Your random number is: {rnd.Next(min, max)}");
+        }
 
+        [Command("pi")]
+        [Summary("What is pi?")]
+        public async Task TellMePi()
+        {
+            double pi = Math.PI;
+            var userinfo = Context.User;
+            await Context.Channel.SendMessageAsync($"You can't calculate pi yourself, {userinfo.Mention}? Pi is: " + pi);
 
+        }
 
+        
+        [Command("memes")]
+        [Summary("Show a random meme")]
+        public async Task ShowAMeme()
+        {
+            await Context.Channel.SendMessageAsync($"I'm sorry. Memes are unavailable at the moment. Blame the lazy developer.");
 
+        }
 
 
 
