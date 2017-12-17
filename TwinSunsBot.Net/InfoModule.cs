@@ -1,6 +1,7 @@
 ﻿using System;
 using Discord.Commands;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace TwinSunsBot.Net
 {
@@ -63,12 +64,26 @@ namespace TwinSunsBot.Net
         [Summary("Show a random meme")]
         public async Task ShowAMeme()
         {
-            await Context.Channel.SendMessageAsync($"I'm sorry. Memes are unavailable at the moment. Blame the lazy developer.");
+            string[] memes = { "","Memes/meme01.jpg", "Memes/meme02.jpg", "Memes/meme03.jpg", "Memes/meme04.jpg", "Memes/meme05.jpg", "Memes/meme06.png", "Memes/meme07.jpg", "Memes/meme08.jpg", "Memes/meme09.jpg", "Memes/meme10.jpg", "Memes/meme11.jpg", "Memes/meme12.jpg", "Memes/meme13.jpg", "Memes/meme14.jpg", "Memes/meme15.jpg", "Memes/meme16.jpg", "Memes/meme17.jpg", "Memes/meme18.jpg", "Memes/meme19.jpg", "Memes/meme20.jpg", "Memes/meme21.jpg", "Memes/meme22.jpg", "Memes/meme23.jpg", "Memes/meme24.jpg" };
+            var rnd = new Random();
+            int next = rnd.Next(0, memes.Length);
+            string chosen = memes[next];
+            Console.WriteLine($"Meme requested.\nArray length: {memes.Length}\nRandom Number chosen: {next}\nMeme file: {chosen}.");
+            if (File.Exists(chosen))
+                {
+                    await Context.Channel.SendFileAsync(chosen,"Memes curtosy of Star Wars Legends Memes on Facebook.");
+                }
+            else
+                {
+                     await Context.Channel.SendMessageAsync($"I had trouble accessing the meme database. Try again.");
+                }
+            
+            //await Context.Channel.SendMessageAsync($"I'm sorry. Memes are unavailable at the moment. Blame the lazy developer.");
 
         }
 
         [Command("help")]
-        [Summary("Show a random meme")]
+        [Summary("Show help")]
         public async Task HelpMe()
         {
             await Context.Channel.SendMessageAsync($"Help system offline.");
