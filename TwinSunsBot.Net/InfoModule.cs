@@ -69,7 +69,7 @@ namespace TwinSunsBot.Net
         {
             
             var rnd = new Random();
-            int next = rnd.Next(0, Global.memes.Length);
+            int next = rnd.Next(0, Global.memes.Length - 1);
             string chosen = Global.memes[next];
             Console.WriteLine($"Meme requested by {Context.User.Username}\nArray length: {Global.memes.Length}\nRandom Number chosen: {next}\nMeme file: {chosen}.\n\n");
             if (File.Exists(chosen))
