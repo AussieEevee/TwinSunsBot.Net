@@ -101,6 +101,7 @@ namespace TwinSunsBot.Net
         [Summary("Guessing game")]
         public async Task GuessGame(int guess = 0)
         {
+            if(number == 0) { Randomnumber(); }
             
             Console.WriteLine($"\nNew Random Number Guess.\nGuess is {guess}.\nCorrect answer is: {number}.\n");
             if(guess == 0)
