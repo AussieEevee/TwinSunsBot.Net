@@ -101,23 +101,24 @@ namespace TwinSunsBot.Net
         [Summary("Guessing game")]
         public async Task GuessGame(int guess = 0)
         {
-            if(number == 0) { Randomnumber(); }
+            Console.WriteLine($"Debug. Global.number is: {Global.number}");
+            if(Global.number == 0) { Randomnumber(); }
             
-            Console.WriteLine($"\nNew Random Number Guess.\nGuess is {guess}.\nCorrect answer is: {number}.\n");
+            Console.WriteLine($"\nNew Random Number Guess.\nGuess is {guess}.\nCorrect answer is: {Global.number}.\n");
             if(guess == 0)
             {
                 await Context.Channel.SendMessageAsync($"Welcome to the number guessing game.\n\nI am thinking of a number between 1 and 1000.\n\nUse the !guess [your guess] command to guess what number I am thinking of. Anyone can play.");
             }
-            else if(guess == number)
+            else if(guess == Global.number)
             {
                 Randomnumber();
                 await Context.Channel.SendMessageAsync($"{Context.User.Mention} has guessed the number correctly. I was indeed thinking of {guess}. Now, I am thinking of a new number.");
             }
-            else if (guess < number)
+            else if (guess < Global.number)
             {
                 await Context.Channel.SendMessageAsync($"Sorry {Context.User.Mention}, Your guess is lower than the number I am thinking of.");
             }
-            else if (guess > number)
+            else if (guess > Global.number)
             {
                 await Context.Channel.SendMessageAsync($"Sorry {Context.User.Mention}, Your guess is higher than the number I am thinking of.");
             }
@@ -127,14 +128,17 @@ namespace TwinSunsBot.Net
 
 
 
-        int number = 0;
+        public static class Global
+        {
+            public static int number { get; set; }
+        }
         Random rnd = new Random();
 
         private void Randomnumber()
         {
             
-            number = rnd.Next(0, 1001);
-            Console.WriteLine($"New Number Generated: {number}");
+            Global.number = rnd.Next(0, 1001);
+            Console.WriteLine($"New Number Generated: {Global.number}");
         }
 
         
