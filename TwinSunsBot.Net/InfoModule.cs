@@ -74,7 +74,7 @@ namespace TwinSunsBot.Net
             Console.WriteLine($"Meme requested by {Context.User.Username}\nArray length: {memes.Length}\nRandom Number chosen: {next}\nMeme file: {chosen}.\n\n");
             if (File.Exists(chosen))
                 {
-                    await Context.Channel.SendFileAsync(chosen,"Memes curtosy of Star Wars Legends Memes on Facebook.");
+                    await Context.Channel.SendFileAsync(chosen, "Memes courtesy of Star Wars Legends Memes on Facebook.");
                 }
             else
                 {
@@ -94,11 +94,15 @@ namespace TwinSunsBot.Net
         }
 
         [Command("beep")]
-        public async Task BeepThis()
+        public async Task BeepThis(int times = 1)
         {
-            Console.Beep(550, 500);
+            for (int i = 0; i < times; i++)
+            {
+                Console.Beep(550, 500);
+            }
 
-            await Task.CompletedTask;
+
+            await Context.Channel.SendMessageAsync("Done beeping. What's next?");
 
 
         }
