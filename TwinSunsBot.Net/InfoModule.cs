@@ -8,10 +8,7 @@ namespace TwinSunsBot.Net
 {
     public class InfoModule : ModuleBase<SocketCommandContext>
     {
-        public InfoModule()
-        {
-            Randomnumber();
-        }
+       
 
         [Command("square")]
         [Summary("Squares a number.")]
@@ -96,7 +93,7 @@ namespace TwinSunsBot.Net
 
         }
 
-        
+        /**AussieEevee Code is so far broken I'm going to use Dylan's code
         [Command("guess")]
         [Summary("Guessing game")]
         public async Task GuessGame(int guess = 0)
@@ -137,27 +134,31 @@ namespace TwinSunsBot.Net
             Global.Number = rnd.Next(0, 1001);
             Console.WriteLine($"New Number Generated: {Global.Number}");
         }
-
+        */
         
-        /* Dylan's code
+         //Dylan's code
         [Command("guess")]
         public async Task GuessGame()
         {
             await Context.Channel.SendMessageAsync("It's time for a game of guessing, I've got a number. You may guess! Once it's correct, I'll tell you. It'll be a number between 1-50");
             Random rand = new Random();
+            int answer = rand.Next(51);
 
-            (Context.Client as DiscordSocketClient).MessageReceived += (s) => GuessHandler(s, rand.Next(51));
+            (Context.Client as DiscordSocketClient).MessageReceived += (s) => GuessHandler(s, answer);
         }
 
         private async Task GuessHandler(SocketMessage arg, int answer)
         {
+            if (int.Parse(arg.Content) < answer) { await Context.Channel.SendMessageAsync("My number is higher."); }
+            else if (int.Parse(arg.Content) > answer) { await Context.Channel.SendMessageAsync("My number is lower."); }
+
             if (arg.Content.StartsWith(answer.ToString()))
             {
                 await arg.Channel.SendMessageAsync($"{arg.Author.Mention} Correct! The answer is indeed {answer}!");
                 (Context.Client as DiscordSocketClient).MessageReceived -= (s) => GuessHandler(s, answer);
             }
         }
-        */
+        
 
 
     }
