@@ -10,7 +10,7 @@ namespace TwinSunsBot.Net
 {
     class Program
     {
-        public static double version = 0.60; //set the version number, so we can check which version is running on the server
+        public static double version = 0.61; //set the version number, so we can check which version is running on the server
 
         static void Main(string[] args)
             	=> new Program().MainAsync().GetAwaiter().GetResult();
@@ -55,7 +55,7 @@ namespace TwinSunsBot.Net
             _client.UserJoined += async (s) =>
             {
                 Console.WriteLine($"New user has joined: {s.Username}"); // Log to the console that someone joined us.
-                await s.Guild.DefaultChannel.SendMessageAsync($"Welcome {s.Mention} to the server!\n\nFeel free to tell us a little about yourself, {s.Username}.\n\nWhere are you from? What Star Wars books do you like?\n\n Do you play the Star Wars video games? Are you interested in the Disney-era movies?\n\nAnd if you haven't already, don't forget to like our Facebook, Youtube, Twitter and Twitch accounts."); // Announce them to the world
+                await s.Guild.DefaultChannel.SendMessageAsync($"@everyone, Please welcome {s.Mention} to the server!\n\nFeel free to tell us a little about yourself, {s.Username}.\n\nWhere are you from? What Star Wars books do you like?\n\n Do you play the Star Wars video games? Are you interested in the Disney-era movies?\n\nAnd if you haven't already, don't forget to like our Facebook, Youtube, Twitter and Twitch accounts."); // Announce them to the world
                 
             };
 
