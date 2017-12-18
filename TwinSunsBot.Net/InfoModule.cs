@@ -67,11 +67,11 @@ namespace TwinSunsBot.Net
         [Summary("Show a random meme")]
         public async Task ShowAMeme()
         {
-            string[] memes = { "","Memes/meme01.jpg", "Memes/meme02.jpg", "Memes/meme03.jpg", "Memes/meme04.jpg", "Memes/meme05.jpg", "Memes/meme06.png", "Memes/meme07.jpg", "Memes/meme08.jpg", "Memes/meme09.jpg", "Memes/meme10.jpg", "Memes/meme11.jpg", "Memes/meme12.jpg", "Memes/meme13.jpg", "Memes/meme14.jpg", "Memes/meme15.jpg", "Memes/meme16.jpg", "Memes/meme17.jpg", "Memes/meme18.jpg", "Memes/meme19.jpg", "Memes/meme20.jpg", "Memes/meme21.jpg", "Memes/meme22.jpg", "Memes/meme23.jpg", "Memes/meme24.jpg" };
+            
             var rnd = new Random();
-            int next = rnd.Next(0, memes.Length);
-            string chosen = memes[next];
-            Console.WriteLine($"Meme requested by {Context.User.Username}\nArray length: {memes.Length}\nRandom Number chosen: {next}\nMeme file: {chosen}.\n\n");
+            int next = rnd.Next(0, Global.memes.Length);
+            string chosen = Global.memes[next];
+            Console.WriteLine($"Meme requested by {Context.User.Username}\nArray length: {Global.memes.Length}\nRandom Number chosen: {next}\nMeme file: {chosen}.\n\n");
             if (File.Exists(chosen))
                 {
                     await Context.Channel.SendFileAsync(chosen, "Memes courtesy of Star Wars Legends Memes on Facebook.");
@@ -82,6 +82,19 @@ namespace TwinSunsBot.Net
                 }
             
             //await Context.Channel.SendMessageAsync($"I'm sorry. Memes are unavailable at the moment. Blame the lazy developer.");
+
+        }
+
+        [Command("listmemes")]
+        [Summary("LIsts the memes array")]
+        public async Task HelpMe()
+        {
+            Console.WriteLine("\nList of memes in the array requested. Processing....");
+            for (int i = 0; i < Global.memes.Length; i++)
+            {
+                Console.WriteLine($"{i} = {Global.memes[i]}");
+            }
+            await Context.Channel.SendMessageAsync($"I have listed the memes array in the console window.");
 
         }
 

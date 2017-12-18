@@ -10,7 +10,7 @@ namespace TwinSunsBot.Net
 {
     class Program
     {
-        public static double version = 1.02; //set the version number, so we can check which version is running on the server
+        public static double version = 1.03; //set the version number, so we can check which version is running on the server
 
         static void Main(string[] args)
             	=> new Program().MainAsync().GetAwaiter().GetResult();
