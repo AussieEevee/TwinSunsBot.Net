@@ -162,8 +162,5 @@ namespace TwinSunsBot.Net
 
     }
 
-    public static class Global
-    {
-        public static int Number { get; set; }
-    }
+    
 }
