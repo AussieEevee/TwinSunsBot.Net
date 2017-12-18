@@ -87,7 +87,7 @@ namespace TwinSunsBot.Net
 
         [Command("listmemes")]
         [Summary("LIsts the memes array")]
-        public async Task HelpMe()
+        public async Task ListMemes()
         {
             Console.WriteLine("\nList of memes in the array requested. Processing....");
             for (int i = 0; i < Global.memes.Length; i++)
