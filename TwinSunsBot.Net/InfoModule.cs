@@ -96,7 +96,7 @@ namespace TwinSunsBot.Net
         [Command("beep")]
         public async Task BeepThis()
         {
-            Console.Beep(550, 5);
+            Console.Beep(550, 500);
 
             await Task.CompletedTask;
 
