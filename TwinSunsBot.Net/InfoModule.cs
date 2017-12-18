@@ -2,11 +2,17 @@
 using Discord.Commands;
 using System.Threading.Tasks;
 using System.IO;
+using Discord.WebSocket;
 
 namespace TwinSunsBot.Net
 {
     public class InfoModule : ModuleBase<SocketCommandContext>
     {
+        public InfoModule()
+        {
+            Randomnumber();
+        }
+
         [Command("square")]
         [Summary("Squares a number.")]
         public async Task SquareAsync([Summary("The number to square.")] int num)
@@ -90,8 +96,66 @@ namespace TwinSunsBot.Net
 
         }
 
+        
+        [Command("guess")]
+        [Summary("Guessing game")]
+        public async Task GuessGame(int guess = 0)
+        {
+            
+            Console.WriteLine($"\nNew Random Number Guess.\nGuess is {guess}.\nCorrect answer is: {number}.\n");
+            if(guess == 0)
+            {
+                await Context.Channel.SendMessageAsync($"Welcome to the number guessing game.\n\nI am thinking of a number between 1 and 1000.\n\nUse the !guess [your guess] command to guess what number I am thinking of. Anyone can play.");
+            }
+            else if(guess == number)
+            {
+                Randomnumber();
+                await Context.Channel.SendMessageAsync($"{Context.User.Mention} has guessed the number correctly. I was indeed thinking of {guess}. Now, I am thinking of a new number.");
+            }
+            else if (guess < number)
+            {
+                await Context.Channel.SendMessageAsync($"Sorry {Context.User.Mention}, Your guess is lower than the number I am thinking of.");
+            }
+            else if (guess > number)
+            {
+                await Context.Channel.SendMessageAsync($"Sorry {Context.User.Mention}, Your guess is higher than the number I am thinking of.");
+            }
+            
+        }
 
 
+
+
+        int number = 0;
+        Random rnd = new Random();
+
+        private void Randomnumber()
+        {
+            
+            number = rnd.Next(0, 1001);
+            Console.WriteLine($"New Number Generated: {number}");
+        }
+
+        
+        /* Dylan's code
+        [Command("guess")]
+        public async Task GuessGame()
+        {
+            await Context.Channel.SendMessageAsync("It's time for a game of guessing, I've got a number. You may guess! Once it's correct, I'll tell you. It'll be a number between 1-50");
+            Random rand = new Random();
+
+            (Context.Client as DiscordSocketClient).MessageReceived += (s) => GuessHandler(s, rand.Next(51));
+        }
+
+        private async Task GuessHandler(SocketMessage arg, int answer)
+        {
+            if (arg.Content.StartsWith(answer.ToString()))
+            {
+                await arg.Channel.SendMessageAsync($"{arg.Author.Mention} Correct! The answer is indeed {answer}!");
+                (Context.Client as DiscordSocketClient).MessageReceived -= (s) => GuessHandler(s, answer);
+            }
+        }
+        */
 
 
     }
