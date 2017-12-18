@@ -93,6 +93,16 @@ namespace TwinSunsBot.Net
 
         }
 
+        [Command("beep")]
+        public async Task BeepThis()
+        {
+            Console.Beep(5, 5);
+
+            await Task.CompletedTask;
+
+
+        }
+
         /**AussieEevee Code is so far broken I'm going to use Dylan's code
         [Command("guess")]
         [Summary("Guessing game")]
@@ -135,8 +145,8 @@ namespace TwinSunsBot.Net
             Console.WriteLine($"New Number Generated: {Global.Number}");
         }
         */
-        
-         //Dylan's code
+
+        //Dylan's code
         [Command("guess")]
         public async Task GuessGame()
         {
@@ -158,7 +168,7 @@ namespace TwinSunsBot.Net
                 (Context.Client as DiscordSocketClient).MessageReceived -= (s) => GuessHandler(s, answer);
             }
         }
-        
+         
 
 
     }
