@@ -96,13 +96,21 @@ namespace TwinSunsBot.Net
         [Command("beep")]
         public async Task BeepThis(int times = 1)
         {
-            for (int i = 0; i < times; i++)
+            if(Context.User.Username == "AussieEevee")
             {
-                Console.Beep(550, 500);
+                for (int i = 0; i < times; i++)
+                {
+                    Console.Beep(550, 500);
+                }
+
+
+                await Context.Channel.SendMessageAsync("I have finished my beeping, @AussieEevee. What's next?");
             }
-
-
-            await Context.Channel.SendMessageAsync("Done beeping. What's next?");
+            else
+            {
+                await Context.Channel.SendMessageAsync("You're not AussieEevee.");
+            }
+           
 
 
         }
