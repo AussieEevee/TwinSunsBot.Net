@@ -170,7 +170,7 @@ namespace TwinSunsBot.Net
             Console.WriteLine($"New Number Generated: {Global.Number}");
         }
         */
-
+        /*
         //Dylan's code
         [Command("guess")]
         public async Task GuessGame()
@@ -186,17 +186,14 @@ namespace TwinSunsBot.Net
         {
             if (int.Parse(arg.Content) < answer) { await Context.Channel.SendMessageAsync("My number is higher."); }
             else if (int.Parse(arg.Content) > answer) { await Context.Channel.SendMessageAsync("My number is lower."); }
-
-            if (arg.Content.StartsWith(answer.ToString()))
+            else
             {
-                await arg.Channel.SendMessageAsync($"{arg.Author.Mention} Correct! The answer is indeed {answer}!");
                 (Context.Client as DiscordSocketClient).MessageReceived -= (s) => GuessHandler(s, answer);
+                await arg.Channel.SendMessageAsync($"{arg.Author.Mention} Correct! The answer is indeed {answer}!");
             }
+            
         }
-         
-
-
+        */
     }
 
-    
 }
