@@ -3,6 +3,7 @@ using Discord.Commands;
 using System.Threading.Tasks;
 using System.IO;
 using Discord.WebSocket;
+using Discord;
 
 namespace TwinSunsBot.Net
 {
@@ -123,7 +124,8 @@ namespace TwinSunsBot.Net
                     break;
 
                 default:
-                    await SocketUser.SendMessageAsync("Valid Commands are: test, reloadmemes, ping, version.);
+                        await Context.User.SendMessageAsync("Valid Commands are: test, reloadmemes, ping, version.");
+                    
                     await Context.Channel.SendMessageAsync($"Command vacant or not recognized.");
                     break;
 
