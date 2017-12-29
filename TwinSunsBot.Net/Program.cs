@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.IO;
 using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
@@ -10,18 +11,23 @@ namespace TwinSunsBot.Net
 {
     class Program
     {
-        public static double version = 1.061; //set the version number, so we can check which version is running on the server
+        public static double version = 1.071; //set the version number, so we can check which version is running on the server
 
         static void Main(string[] args)
-            	=> new Program().MainAsync().GetAwaiter().GetResult();
+                => new Program().MainAsync().GetAwaiter().GetResult();
         private DiscordSocketClient _client;
         private CommandService _commands;
-        
-      
+
+
         private IServiceProvider _services;
+        private void ScanMemes()
+        {
+
+
+        }
         public async Task MainAsync()
-            {
-            
+        {
+
             _client = new DiscordSocketClient(); //Create the discord client.
 
             _client.Log += Log; // log important stuff
@@ -29,16 +35,16 @@ namespace TwinSunsBot.Net
             string ver;
             if (System.Diagnostics.Debugger.IsAttached)
             {
-               ver = $"{version}.debug"; // code or timeout value when running tests in debug mode
+                ver = $"{version}.debug"; // code or timeout value when running tests in debug mode
             }
 
             else
             {
-               ver = $"{version}";  // non debug mode
+                ver = $"{version}";  // non debug mode
             }
 
             Console.WriteLine($"TwinSunsBot.Net version {ver}");
-            
+
 
             _services = new ServiceCollection()
                 .AddSingleton(_client)
@@ -56,7 +62,7 @@ namespace TwinSunsBot.Net
             {
                 Console.WriteLine($"{DateTime.Now.ToString("dd/MM/yyyy")} {DateTime.Now.ToString("HH:mm:ss")} New user has joined: {s.Username}"); // Log to the console that someone joined us.
                 await s.Guild.DefaultChannel.SendMessageAsync($"@everyone, Please welcome {s.Mention} to the server!\n\nFeel free to tell us a little about yourself, {s.Username}.\n\nWhere are you from? What Star Wars books do you like?\n\n Do you play the Star Wars video games? Are you interested in the Disney-era movies?\n\nAnd if you haven't already, don't forget to like our Facebook, Youtube, Twitter and Twitch accounts."); // Announce them to the world
-                
+
             };
 
             _client.UserLeft += async (s) =>
@@ -101,12 +107,13 @@ namespace TwinSunsBot.Net
             Console.WriteLine($"{DateTime.Now.ToString("dd/MM/yyyy")} {msg.ToString()}"); // Log our logs to the console
             return Task.CompletedTask;
         }
+
         
 
     };
 
 
-
+   
 
 
 

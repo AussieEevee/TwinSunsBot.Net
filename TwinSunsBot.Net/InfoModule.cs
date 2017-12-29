@@ -106,6 +106,29 @@ namespace TwinSunsBot.Net
 
         }
 
+        [Command("admin")]
+        public async Task AdminCommand(string cmd = "")
+        {
+            if (Context.User.Username == "AussieEevee")
+            {
+                if(cmd == "test")
+                {
+                    await Context.Channel.SendMessageAsync($"Admin Command Test");
+                }
+                else
+                {
+                    await Context.Channel.SendMessageAsync($"Command vacant or not recognized.");
+                }
+            }
+            else
+            {
+                await Context.Channel.SendMessageAsync($"Only AussieEevee can use these commands. Sorry, {Context.User.Username}.");
+            }
+
+
+
+        }
+
         [Command("beep")]
         public async Task BeepThis(int times = 1)
         {
