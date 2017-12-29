@@ -124,9 +124,8 @@ namespace TwinSunsBot.Net
                     break;
 
                 default:
-                        await Context.User.SendMessageAsync("Valid Commands are: test, reloadmemes, ping, version.");
-                    
-                    await Context.Channel.SendMessageAsync($"Command vacant or not recognized.");
+                    await Context.User.SendMessageAsync("Valid Commands are: test, reloadmemes, ping, version.");
+                    await Context.Channel.SendMessageAsync($"Command vacant or not recognized. Valid commands have been PMed to you.");
                     break;
 
 
