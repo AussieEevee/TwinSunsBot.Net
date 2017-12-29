@@ -18,15 +18,7 @@ namespace TwinSunsBot.Net
             await Context.Channel.SendMessageAsync($"{num}^2 = {Math.Pow(num, 2)}");
         }
 
-        [Command("ping")]
-        [Summary("Check to see if the bot is working?")]
-        public async Task PingBot()
-        {
-            var userinfo = Context.User;
-            var ping = Context.Client.Latency;
-            // We can also access the channel from the Command Context.
-            await Context.Channel.SendMessageAsync($"Pong! I can see you, {userinfo.Mention}. The bots ping is: {ping}ms.");
-        }
+
 
         [Command("hi")]
         [Summary("Say hi to the user.")]
@@ -37,12 +29,7 @@ namespace TwinSunsBot.Net
             await Context.Channel.SendMessageAsync($"Hello {userinfo.Mention}!");
         }
 
-        [Command("version")]
-        [Summary("Check what version we are running.")]
-        public async Task VersionCheck()
-        {
-            await Context.Channel.SendMessageAsync($"This is TwinSunsBot.Net v{Global.version}");
-        }
+
 
         [Command("random")]
         [Summary("Returns a random number.")]
@@ -109,26 +96,46 @@ namespace TwinSunsBot.Net
         [Command("admin")]
         public async Task AdminCommand(string cmd = "")
         {
-            if (Context.User.Username == "AussieEevee")
+            string thecmd = cmd.ToLower();
+            if (Context.User.Username == "AussieEevee" || Context.User.Username == "Brian Borg" || Context.User.Username == "Saberthrib")
             {
-                if(cmd == "test")
-                {
+                switch (thecmd)
+            {
+                case "test":
                     await Context.Channel.SendMessageAsync($"Admin Command Test");
-                }
-                if (cmd == "reloadmemes")
-                {
+                    break;
+
+                case "reloadmemes":
                     Console.WriteLine("Reload Meme directory requested.");
-                    Global.memes = Directory.GetFiles(@"Memes\"); 
+                    Global.memes = Directory.GetFiles(@"Memes\");
                     await Context.Channel.SendMessageAsync($"Memes refreshed. I have {Global.memes.Length} memes in my database.");
-                }
-                else
-                {
+                    break;
+
+                case "version":
+                    await Context.Channel.SendMessageAsync($"This is TwinSunsBot.Net v{Global.version}");
+                    break;
+
+                case "ping":
+                    var userinfo = Context.User;
+                    var ping = Context.Client.Latency;
+                    // We can also access the channel from the Command Context.
+                    await Context.Channel.SendMessageAsync($"Pong! I can see you, {userinfo.Mention}. The bots ping is: {ping}ms.");
+                    break;
+
+                default:
+                    
                     await Context.Channel.SendMessageAsync($"Command vacant or not recognized.");
-                }
+                    break;
+
+
+            }
+            
+            
+               
             }
             else
             {
-                await Context.Channel.SendMessageAsync($"Only AussieEevee can use these commands. Sorry, {Context.User.Username}.");
+                await Context.Channel.SendMessageAsync($"Only admins can use these commands. Sorry, {Context.User.Username}.");
             }
 
 

@@ -11,7 +11,7 @@ namespace TwinSunsBot.Net
     {
         public static int Number { get; set; }
         public static string[] memes = Directory.GetFiles(@"Memes\");
-        public static double version = 1.082;
+        public static double version = 1.085;
 
     }
 }
