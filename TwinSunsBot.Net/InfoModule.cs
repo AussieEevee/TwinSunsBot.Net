@@ -41,7 +41,7 @@ namespace TwinSunsBot.Net
         [Summary("Check what version we are running.")]
         public async Task VersionCheck()
         {
-            await Context.Channel.SendMessageAsync($"This is Twin Suns Bot .Net version {Program.version}");
+            await Context.Channel.SendMessageAsync($"This is Twin Suns Bot .Net version {Global.version}");
         }
 
         [Command("random")]
@@ -114,6 +114,12 @@ namespace TwinSunsBot.Net
                 if(cmd == "test")
                 {
                     await Context.Channel.SendMessageAsync($"Admin Command Test");
+                }
+                if (cmd == "reloadmemes")
+                {
+                    Console.WriteLine("Reload Meme directory requested.");
+                    Global.memes = Directory.GetFiles(@"Memes\"); 
+                    await Context.Channel.SendMessageAsync($"Memes refreshed. I have {Global.memes.Length} memes in my database.");
                 }
                 else
                 {

@@ -11,7 +11,7 @@ namespace TwinSunsBot.Net
 {
     class Program
     {
-        public static double version = 1.071; //set the version number, so we can check which version is running on the server
+         //set the version number, so we can check which version is running on the server
 
         static void Main(string[] args)
                 => new Program().MainAsync().GetAwaiter().GetResult();
@@ -35,12 +35,12 @@ namespace TwinSunsBot.Net
             string ver;
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                ver = $"{version}.debug"; // code or timeout value when running tests in debug mode
+                ver = $"{Global.version}.debug"; // code or timeout value when running tests in debug mode
             }
 
             else
             {
-                ver = $"{version}";  // non debug mode
+                ver = $"{Global.version}";  // non debug mode
             }
 
             Console.WriteLine($"TwinSunsBot.Net version {ver}");
