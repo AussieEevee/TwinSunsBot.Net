@@ -11,4 +11,5 @@ namespace TwinSunsBot.Net
             public static string Token { get => token; } // Assign the token string to a public string so it can be accessed by the rest of the program.
         }
     
+    
 }
